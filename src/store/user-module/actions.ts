@@ -25,13 +25,31 @@ const actions: ActionTree<UserStateInterface, StateInterface> = {
     if (!responseStatus) {
       return false;
     }
-    responseData.accessToken = token;
-    commit('updateUserAndToken', responseData);
+    commit('updateUserAndToken', {accessToken: token, user: responseData});
     return true;
   },
   logout({ commit }) {
     deleteCookie('authToken');
     commit('updateUserAndToken', { user: null, accessToken: null });
+  },
+  async updateZohoCredentials({ commit, state }, payload): Promise<KampaignApiResponse>{
+    const apiService = new ApiService();
+    const kampaignApiResponse = await apiService.post('zoho', payload, state.accessToken);
+    const { responseStatus, responseData } = kampaignApiResponse;
+    if (responseStatus) {
+      commit('updateUser', responseData);
+    }
+    return kampaignApiResponse;
+  },
+  async updateZohoAuth({ commit, state }, payload): Promise<KampaignApiResponse>{
+    const code = payload;
+    const apiService = new ApiService();
+    const kampaignApiResponse = await apiService.post('zoho/auth', {code}, state.accessToken);
+    const { responseStatus, responseData } = kampaignApiResponse;
+    if (responseStatus) {
+      commit('updateUser', responseData);
+    }
+    return kampaignApiResponse;
   }
 };
 

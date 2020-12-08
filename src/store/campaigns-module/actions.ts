@@ -38,6 +38,7 @@ const actions: ActionTree<CampaignsStateInterface, StateInterface> = {
     const updateCampaignDto: UpdateCampaignDto = {
       title: rootState.campaigns.currentCampaign.title,
       html: rootState.campaigns.currentCampaign.html,
+      subject: rootState.campaigns.currentCampaign.subject,
       senders: rootState.campaigns.currentCampaign.senderEmails.map((cse) => cse.sender.id)
     }
     const { id } = rootState.campaigns.currentCampaign
@@ -85,7 +86,7 @@ const actions: ActionTree<CampaignsStateInterface, StateInterface> = {
     commit('removeSenderEmail', id);
     const kampaignApiResponse: Promise<KampaignApiResponse> = await dispatch('saveCampaign');
     return kampaignApiResponse;
-  }
+  },
 };
 
 export default actions;

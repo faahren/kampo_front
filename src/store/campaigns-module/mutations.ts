@@ -13,6 +13,12 @@ const mutation: MutationTree<CampaignsStateInterface> = {
   updateCampaignHtml(state: CampaignsStateInterface, html: string){
     if (state.currentCampaign) state.currentCampaign.html = html;
   },
+  updateCampaignSubject(state: CampaignsStateInterface, subject: string){
+    if (state.currentCampaign) state.currentCampaign.subject = subject;
+  },
+  updateCampaignTitle(state: CampaignsStateInterface, title: string){
+    if (state.currentCampaign) state.currentCampaign.title = title;
+  },
   setAvailableSenders(state: CampaignsStateInterface, senders: Sender[]){
     state.availableSenders = senders;
   },

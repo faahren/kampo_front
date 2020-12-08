@@ -24,6 +24,14 @@
                 <q-icon name="clear" />
               </q-item-section>
             </q-item>
+            <q-item>
+              <q-item-section  @click="goToSync()">
+                <q-item-label>Sync settings</q-item-label>
+              </q-item-section>
+              <q-item-section side>
+                <q-icon name="sync" />
+              </q-item-section>
+            </q-item>
           </q-list>
         </q-btn-dropdown>
 
@@ -46,6 +54,9 @@ export default defineComponent({
     async logOut() {
       await this.$store.dispatch('users/logout');
       await this.$router.push({name: 'SignInPage'});
+    },
+    goToSync() {
+      this.$router.push({name: 'Sync'});
     }
   }
 });

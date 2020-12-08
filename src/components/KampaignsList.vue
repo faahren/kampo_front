@@ -8,7 +8,7 @@
       :columns="columns"
       row-key="id"
       class="row"
-      @row-click="rowClik"
+      @row-click="rowClick"
     />
   </div>
 </template>
@@ -79,7 +79,7 @@ export default defineComponent({
     await this.$store.dispatch('campaigns/getAllCampaigns');
   },
   methods: {
-    async rowClik(evt: MouseEvent, row: Campaign) {
+    async rowClick(evt: MouseEvent, row: Campaign) {
       await this.$router.push({name: 'Kampaign', params: { id: row.id.toString() }})
     }
   }
